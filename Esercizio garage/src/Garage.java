@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Date;
-//test commento
+
 /**
  * Classe che definisce un garage e istanzia il numero di livelli desiderato
  * @author Fabrizio Pilone

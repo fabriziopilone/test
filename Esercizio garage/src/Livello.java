@@ -51,7 +51,7 @@ public class Livello {
 	}
 /**
  * scorre tutti i posti occupati del tipo uguale a quello dell'auto, se sono minori del numero totale di
- * posti di quel tipo restituisce il numero di posto in cui inserire la nuova auto
+ * posti di quel tipo restituisce il numero di posto in cui inserire la nuova auto, altrimenti 0
  * @param auto automobile da parcheggiare
  * @return restutisce il numero del posto se c'è ancora posto nel livello per un tipo di automobile
  */
@@ -91,7 +91,12 @@ public class Livello {
 		}
 		else return 1;
 	}
-	
+/**
+ * funzione che prende in ingresso il valore restituito da controlloCapacità e lo interpreta come posto
+ * in cui parcheggiare, se uguale 0 stampa che non c'è posto
+ * @param auto auto da parcheggiare
+ * @return true se ha parcheggiato, false altrimenti
+ */
 	public boolean assegnaPosto(Macchina auto) {
 		int pos = controlloCapacità(auto.getTipoAuto());
 		if (pos != 0) {
@@ -114,7 +119,13 @@ public class Livello {
 					+"--> Macchina con targa: "  +posto.getMacchina().getTarga());
 		}
 	}
-	
+/**
+ * scorre tutti i posti contando il numero di posti affittati per il tipo richiesto, verificando se sono
+ * meno del 50% del totale
+ * @param tipoPosto tipo del posto da affittare
+ * @return true se i posti affittati di quel tipo sono meno del 50% del numero di posti totali di quel tipo
+ * false altrimenti
+ */
 	private boolean controlloAffitti(String tipoPosto) {
 		int cont=0;
 		if (!posti.isEmpty()) {
@@ -151,7 +162,14 @@ public class Livello {
 		}
 		else return false;
 	}
-	
+/**
+ * se controlloCapacità e controlloAffitti danno esito positivo affitta il posto indicato da 
+ * controlloCapacità, altrimenti distingue i due casi in cui non ci sono posti da affittare o i posti
+ * sono momentaneamente occupati da macchine parcheggiate (che quindi si libereranno tra poco)
+ * @param tipoPosto tipo del posto da affittare
+ * @return numero del posto se si può affittare, 1 se ci sono posti da affittare ma sono momentaneamente 
+ * occupati, 0 se non ci sono posti da affittare
+ */
 	public int affittaPosto (String tipoPosto) {
 		boolean affitti = controlloAffitti(tipoPosto);
 		int pos = controlloCapacità(tipoPosto);
